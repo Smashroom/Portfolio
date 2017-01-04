@@ -19,3 +19,5 @@ At this project ,My advisor was Murat Gol and Ozan Keysan ,who are Asso.Professo
 RIoT(Wi-Fi Controlled Smart Laboratory)(June 2016-?)
 
 At this Project,My advisor was Murat Gol who are Asso.Professor in METU . In the Project, I tried to construct a smart laboratory which power line can be controlled by using Wi-Fi and so step-by-step we can construct a human companion robotic laboratory . My main object is analyzing whole flat grid and so construct an embedded based control system to achieve the object . I am using Lua programming language based NodeMCU and python to control Raspberry Pi based scripts. Because the Project is ongoing that is all about Project declaration .
+
+Currently , I am interested in Robots Motor Drive and I try to understand some different robot kinematics and dynamics . After that , I will try to construct some different typed pendulum to analyze various systems.  
