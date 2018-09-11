@@ -1,4 +1,0 @@
-import json
-
-with open("data2.txt") as tweetfile:
-	pyresponse=json.load(tweetfile)

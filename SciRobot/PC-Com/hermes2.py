@@ -78,11 +78,9 @@ def ListenBluetooth():
 			now=datetime.datetime.now()
 			currentTime=now.strftime("%Y-%m-%d %H:%M:%S")
 			dataFile.write(currentTime+' \n\n')
-			dataFile.write('-------The Processes--------'+'\n\n')	
-			#print "Buradayim button1"		
+			dataFile.write('-------The Processes--------'+'\n\n')			
 			flagstheThread=False
 		if "Y" in data3:
-			#print "Buradayim button2"
 			flagstheThread=True
 			writetoList()
 			dataFile=open('data2.txt','a')		
@@ -97,11 +95,10 @@ def captureTitle():
 			continue
 		else: 
 			break
-	#print "Burada miyim "
+	
 	try:
 		Timer(2,captureTitle).start()
 	except:
-		#print "zamaan olmadi"
 		pass	
 	global sessionActivities
 	global sessionPidActivity
@@ -126,7 +123,6 @@ def captureTitle():
 				sessionActivities[window_name]=currentActivity
 		event = disp.next_event()
 	except:
-		#print "kaydedemedi "
 		pass	
 
 def writetoList():
@@ -200,7 +196,6 @@ thread2.start()
 #Join the micro threads to the main thread
 thread1.join()
 thread2.join()
-#print "Exit bre"
 
 sock.close()
 

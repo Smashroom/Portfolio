@@ -1,4 +1,4 @@
-
+﻿
 JeanPiere Demir
 
 Email: jeanpiere.demir@gmail.com
@@ -7,6 +7,8 @@ Phone: (+90) 538 6577505
 
 ---
 
+Research Projects
+-----------------
 **Smart Grid and Power System Analysis (April 2015​-June 2016)**
 
 At this project,My advisor was Murat Gol,who is Asso.Profesor at METU.In this project,my aim was a Enhancement of State Estimator for Power Systems Measurement.Firstly to be able to understand a Grid,I tried to create an environment where the whole connectivity matrices , measurement matrices(Sparse Matrices) can be declared by Knuth’s Method. After implementing that by using C++ OOP than  analyzed a real Grid try to find admittance matrix of the grid.Now I try to analyze the grid or the network it is observable or not.
@@ -19,6 +21,8 @@ At this project ,My advisor was Murat Gol and Ozan Keysan ,who are Asso.Professo
 
 At this Project,My advisor was Murat Gol who is Asso.Professor in METU and I worked with group called IEEE RAS METU which the former chair was me. In the Project, We tried to construct a smart laboratory which power line can be controlled by using Wi-Fi and so step-by-step we can construct a human companion robotic laboratory . Our main object is analyzing whole flat grid and so construct an embedded based control system to achieve the object . We were using Lua programming language based NodeMCU and python,C++ to control Raspberry Pi based scripts. Because the Project is ongoing that is all about Project declaration .
 
+Course Related Projects
+---------------------
 **Modelling a DC Motor Drive System(March 2017-April 2017)** 
 
 In this project my advisor was Ozan Keysan who is Asso.Professor in METU and this project was our lecture(EE462) project. My objectives was,
@@ -28,7 +32,6 @@ In this project my advisor was Ozan Keysan who is Asso.Professor in METU and thi
 - Building a simple DC motor drive on your own
 
 - Analyzing of the electrical and mechanical characteristics
-
 
 **Modeling a four-quadrant chopper DC-motor drive system for Metro Traction System(April 2017-April 2017)**
 
@@ -63,7 +66,7 @@ In this project my advisor was Ozan Keysan who is Asso.Professor in METU and thi
 
 - Applying closed-loop control
 
-** Training	Multilayer Perceptron In order to Control Prosthetic Hand Controllers (April 2017-April 2017)**
+** Training Multilayer Perceptron In order to Control Prosthetic Hand Controllers (April 2017-April 2017)**
 
 In this project my advisor was Ugur Halici who is Proffesor in METU and this project was our lecture (496 (Introduction to Computational Intelligence)) project. Project Description is,
 
@@ -78,6 +81,11 @@ In this project my advisor was Ugur Halici who is Proffesor in METU and this pro
 - Course capacities should not be exceeded
 
 The purpose of the genetic algorithm is to ﬁnd the best candidate for the solution,and after pass the new childs to next generation.
+
+** Sensor Based Coverage (April 2017-May 2017) **
+In this project my advisor was Uluc Saranli who is Proffesor in METU and this project was our lecture (CENG786 (Motion Planning and Control)) homework. Our purpose was to develop trapeziodal decomposition based on sensor coverage algorithm. 
+
+
 
 
 ---
