@@ -82,9 +82,9 @@ In this project my advisor was Ugur Halici who is Proffesor in METU and this pro
 
 The purpose of the genetic algorithm is to ﬁnd the best candidate for the solution,and after pass the new childs to next generation.
 
-**Sensor Based Coverage (April 2017-May 2017) **
+**Sensor Based Coverage (April 2017-May 2017)**
 
 In this project my advisor was Uluc Saranli who is Proffesor in METU and this project was our lecture (CENG786 (Motion Planning and Control)) homework. Our purpose was to develop trapeziodal decomposition based on sensor coverage algorithm. 
 
 ---
-Currently , I am interested in Robots Motor Drive and I try to understand some different robot kinematics and dynamics . Currently, I am dealing with Actuated Passive Walkers and Stability Analysis tool for Underactuated Robots.
+Currently , I am interested in Robots Motor Drive and I try to understand some different robot kinematics and dynamics . Moreover, I am dealing with Actuated Passive Walkers and Stability Analysis tool for Underactuated Robots.
