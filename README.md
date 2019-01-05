@@ -90,7 +90,6 @@ In this project my advisor was Prof. Uluc Saranli and this project was our cours
 
 In this project my advisor was Prof. Uluc Saranli and this project was our course related homework. Our purpose was to develop trapeziodal decomposition based on sensor coverage algorithm. (Open ceng786_hw2.m file and hit the run button)
 
-
 **RG-RRT for Planar Hexapod**
 In this project my advisor was Prof. Uluc Saranli and this project was our course related homework. Our purpose was to implement RG-RRT* algorithm for planar hexapod which configuration space was 30D. I could not share the scripts directly but one can review the project report and if it scripts are required I can share the script with them.
 *Walter, M., Reachability-guided, R. T., Shkolnik, A., Walter, M., & Tedrake, R. (2014). Reachability-guided sampling for planning under differential constraints The MIT Faculty has made this article openly available . Please share Citation Accessed Citable Link Detailed Terms Reachability-Guided Sampling for Planning Under Differential Const.
@@ -100,5 +99,6 @@ In this project my advisor was Prof. Kemal Leblecioglu and this project was our 
 
 **Helicopter Control**
 In this project my advisor was Prof. Klauss Werner Schmidt and this project was our course related homework. Our purpose was to develop a feedback linearization based planar helicopter controller. 
+
 ---
 Currently , I am interested in Robots Motor Drive and I try to understand some different robot kinematics and dynamics . Moreover, I am dealing with Actuated Passive Walkers and Stability Analysis tool for Underactuated Robots.
