@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot name="test_robot">
+
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder length="0" radius="0.0"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="first_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.5" radius="0.02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.25"/>
+    </visual>
+  </link>
+
+  <link name="second_link">
+    <visual>
+      <geometry>
+        <cylinder length="1" radius="0.02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.5"/>
+    </visual>
+  </link>
+
+  <joint name="first_joint" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="1"/>
+    <origin rpy="0 0 0" xyz="0.0 0.00 0.0"/>
+    <parent link="base_link"/>
+    <child link="first_link"/>
+  </joint>
+
+  <joint name="second_joint" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="1"/>
+    <origin rpy="0.5 0 0" xyz="0.0 0.00 0.5"/>
+    <parent link="first_link"/>
+    <child link="second_link"/>
+  </joint>
+
+  <transmission name="trans1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="first_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+</robot>

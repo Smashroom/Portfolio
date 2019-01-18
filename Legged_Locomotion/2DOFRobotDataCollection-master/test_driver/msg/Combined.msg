@@ -1,0 +1,2 @@
+float64 first_joint
+float64 second_joint

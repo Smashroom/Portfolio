@@ -1,0 +1,14 @@
+test_robot:
+  # Publish all joint states -----------------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  # Velocity Controllers ---------------------------------------------
+  first_joint_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: first_joint
+  second_joint_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: second_joint
+    

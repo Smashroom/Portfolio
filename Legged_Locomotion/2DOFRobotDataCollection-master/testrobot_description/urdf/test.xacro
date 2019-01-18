@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<robot name="test_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+ <xacro:include filename="$(find testrobot_description)/urdf/test.gazebo" />
+<xacro:include filename="$(find testrobot_description)/urdf/materials.xacro" />
+
+<!-- <gazebo>
+    <static>true</static>
+</gazebo> -->
+
+
+  <link name="base_link">
+    
+
+
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0" />
+      <inertia ixx="0.0741666666667" ixy="0.0" ixz="0.0" iyy="0.0585416666667" iyz="0.0" izz="0.0260416666667"/>
+</inertial>
+  </link>
+<link name="world"/>
+
+  <joint name="fixed" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+
+
+  <link name="first_link">
+
+    <collision>
+      <origin xyz="0 0 0.25" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.5" radius="0.02"/>
+      </geometry>
+      
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0.25" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.5" radius="0.02"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+    <inertial>
+        <origin xyz="0 0 0.25" rpy="0 0 0" />
+        <mass value="1.0" />
+        <inertia
+          ixx="1.0" ixy="0.0" ixz="0.0"
+          iyy="1.0" iyz="0.0"
+          izz="1.0" />
+    </inertial>
+  </link>
+
+  <joint name="first_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="first_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+  <transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="first_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+  <link name="second_link">
+    <visual>
+      <geometry>
+        <cylinder length="1" radius="0.02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.5"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="1" radius="0.02"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0.5"/>
+    </collision>
+
+    <inertial>
+        <origin xyz="0 0 0.5" rpy="0 0 0" />
+        <mass value="1" />
+        <inertia
+          ixx="1.0" ixy="0.0" ixz="0.0"
+          iyy="1.0" iyz="0.0"
+          izz="1.0" />
+    </inertial>
+  </link>
+
+
+
+<!--   <joint name="second_joint" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="1"/>
+    <origin rpy="0.5 0 0" xyz="0.0 0.00 0.5"/>
+    <parent link="first_link"/>
+    <child link="second_link"/>
+  </joint> -->
+  <joint name="second_joint" type="continuous">
+    <axis xyz="1 0 0"/>
+    <!-- <limit effort="1000000.0" lower="-3.0" upper="3.0" velocity="1"/> -->
+    <origin rpy="0 0 0" xyz="0.0 0.00 0.5"/>
+    <parent link="first_link"/>
+    <child link="second_link"/>
+  </joint>
+
+
+  <transmission name="trans2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="second_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor2">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+</robot>
