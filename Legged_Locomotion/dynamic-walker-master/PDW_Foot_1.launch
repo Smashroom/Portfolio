@@ -1,5 +1,0 @@
-<launch>
-  <include file="$/home/mrsmash/Desktop/Courses/Legged_Locomotion/PDW_Foot_1.launch">
-    <arg name="world_name" value="default.world"/>
-  </include>
-</launch>
