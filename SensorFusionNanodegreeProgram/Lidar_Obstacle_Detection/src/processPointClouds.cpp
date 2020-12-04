@@ -245,7 +245,11 @@ std::vector<typename pcl::PointCloud<PointT>::Ptr> ProcessPointClouds<PointT>::C
   	{
         typename pcl::PointCloud<PointT>::Ptr cluster_pc(new pcl::PointCloud<PointT>());      
         for (int idx: cluster){
-            cluster_pc->points.push_back(PointT(cloud->points[idx].x,cloud->points[idx].y,cloud->points[idx].z));    
+            PointT point;
+            point.x = cloud->points[idx].x;
+            point.y = cloud->points[idx].y;
+            point.z = cloud->points[idx].z;
+            cluster_pc->points.push_back(point);    
         }
         result_cluster.push_back(cluster_pc);
     }
