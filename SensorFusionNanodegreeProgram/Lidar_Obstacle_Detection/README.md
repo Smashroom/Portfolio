@@ -26,8 +26,8 @@ In this course we will be talking about sensor fusion, whch is the process of ta
 ```bash
 $> sudo apt install libpcl-dev
 $> cd ~
-$> git clone https://github.com/udacity/SFND_Lidar_Obstacle_Detection.git
-$> cd SFND_Lidar_Obstacle_Detection
+$> git clone https://github.com/Smashroom/Portfolio.git
+$> cd SensorFusionNanodegreeProgram/Lidar_Obstacle_Detection
 $> mkdir build && cd build
 $> cmake ..
 $> make
@@ -58,6 +58,16 @@ http://www.pointclouds.org/downloads/windows.html
 	```bash
 	$> brew install pcl
 	```
+
+### For the quiz folders
+
+1. Create a build directory under one of the quiz folder (ransac or cluster)
+```bash
+$> mkdir build && cd build
+$> cmake ..
+$> make
+%> ./quizCluster or ./quizRansac
+```
 
 #### Prebuilt Binaries via Universal Installer
 http://www.pointclouds.org/downloads/macosx.html  
