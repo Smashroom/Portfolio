@@ -3,7 +3,7 @@ JeanPiere Demir
 
 Email: jeanpiere.demir@gmail.com
 
-Phone: (+90) 538 6577505
+Phone: (+44) 749 300 3968
 
 ---
 
@@ -103,5 +103,14 @@ In this project my advisor was Prof. Kemal Leblecioglu and this project was our 
 
 In this project my advisor was Prof. Klauss Werner Schmidt and this project was our course related homework. Our purpose was to develop a feedback linearization based planar helicopter controller. 
 
----
-Currently , I am interested in Robots Motor Drive and I try to understand some different robot kinematics and dynamics . Moreover, I am dealing with Actuated Passive Walkers and Stability Analysis tool for Underactuated Robots.
+
+Sensor Fusion Nanodegree Program (30 November 2020)
+-----------------
+
+**Lidar Obstacle Detection(04 December 2020)**
+As part of the Sensor Fusion Nanodegree program, I implemented a lidar obstacle detection app with the guidelines of the program. PCL library has been used only for the datastructures and visualisation. Briefly, the app:
+- Filter the streamed pointcloud
+- Segment them to obtain obstacles and road pointcloud
+- Cluster obtained obstacle pointcloud
+- Bound different clusters of obstacle with boxes
+- Render them 
