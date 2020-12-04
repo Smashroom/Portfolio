@@ -59,14 +59,24 @@ http://www.pointclouds.org/downloads/windows.html
 	$> brew install pcl
 	```
 
-### For the quiz folders
+### To build the actual project
 
-1. Create a build directory under one of the quiz folder (ransac or cluster)
 ```bash
 $> mkdir build && cd build
 $> cmake ..
 $> make
-%> ./quizCluster or ./quizRansac
+$> ./environment
+```
+
+### For the quiz folders
+
+1. Create a build directory under one of the quiz folder (ransac or cluster)
+```bash
+$> cd src/quiz/ransac or cd src/quiz/cluster
+$> mkdir build && cd build
+$> cmake ..
+$> make
+$> ./quizCluster or ./quizRansac
 ```
 
 #### Prebuilt Binaries via Universal Installer
