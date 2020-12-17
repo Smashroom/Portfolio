@@ -38,7 +38,7 @@ int main(int argc, const char *argv[])
 
     
     std::vector<string> detectorTypeList = {"SHITOMASI", "HARRIS", "BRISK", "FAST", "ORB", "AKAZE", "SIFT"};
-    std::vector<string> decriptorTypeList = {"BRISK"}; //, "BRIEF" , "ORB", "FREAK" , "AKAZE" , "SIFT"};
+    std::vector<string> decriptorTypeList = {"BRISK","BRIEF" , "ORB", "FREAK" , "AKAZE" , "SIFT"};
     
     bool bVis = false;
     
