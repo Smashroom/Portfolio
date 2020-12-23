@@ -199,3 +199,26 @@ Table 1: Mean of TTC Camera when different keypoint&descriptor pairs has been us
 
 As one can see from Table 1, when **FAST** or **SHI-THOMASI** have been used as a keypoint detector the distribution of the generated TTC camera became more reasonable and there are not too much difference bettween each frame. The main reason of that could be both methods extract huge amount of feature from each frame, so that stitching each frame to each other became easier and having so many distance ratios for each feature made ttc camera more resillient to outliers.
 
+## Build Instructions
+
+```bash
+$> nano CMakeLists.txt (if Opencv built from source, specifcy the PATHS explicitly)
+$> mkdir build && cd build
+$> cmake ..
+$> make
+$> ./3D_object_tracking
+```
+
+## BUILDING NOTE 
+
+If **opencv**>4.3.0 add change namespace for **SIFT** detector:
+
+- **opencv** < 4.3.0
+```cpp
+cv::Ptr<cv::xfeatures2d::SIFT> siftDetector = cv::xfeatures2d::SIFT::create(minHessian);
+```
+
+- **opencv** >= 4.3.0
+```cpp
+cv::Ptr<cv::SIFT> siftDetector = cv::SIFT::create(minHessian);
+```
