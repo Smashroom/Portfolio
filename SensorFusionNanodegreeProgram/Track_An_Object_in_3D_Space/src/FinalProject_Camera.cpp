@@ -133,13 +133,18 @@ int main(int argc, const char *argv[])
                             shrinkFactor, P_rect_00, R_rect_00, RT);
 
         // Visualize 3D objects
-        bVis = true;
+        bVis = false;
         if(bVis)
         {
             show3DObjects(dataBuffer.element_indexed_from_last()->boundingBoxes, cv::Size(4.0, 20.0), cv::Size(2000, 2000), true);
         }
         bVis = false;
 
+        bVis = false;
+        if(bVis)
+        {
+            showLidarTopview(dataBuffer.element_indexed_from_last()->lidarPoints, cv::Size(4.0, 20.0), cv::Size(2000, 2000), true);
+        }
         cout << "#4 : CLUSTER LIDAR POINT CLOUD done" << endl;
         
         
@@ -156,7 +161,7 @@ int main(int argc, const char *argv[])
         
         // extract 2D keypoints from current image
         vector<cv::KeyPoint> keypoints; // create empty feature list for current image
-        string detectorType = "SHITOMASI";
+        string detectorType = "AKAZE";
         double timeElapsedKeypoints;
         if (detectorType.compare("SHITOMASI") == 0)
         {
@@ -193,7 +198,7 @@ int main(int argc, const char *argv[])
         /* EXTRACT KEYPOINT DESCRIPTORS */
 
         cv::Mat descriptors;
-        string descriptorType = "BRISK"; // BRISK, BRIEF, ORB, FREAK, AKAZE, SIFT
+        string descriptorType = "AKAZE"; // BRISK, BRIEF, ORB, FREAK, AKAZE, SIFT
         double timeElapsedDescriptor;
         descKeypoints(dataBuffer.element_indexed_from_last()->keypoints, 
                       dataBuffer.element_indexed_from_last()->cameraImg, 
@@ -294,23 +299,29 @@ int main(int argc, const char *argv[])
                     double ttcCamera;
                     clusterKptMatchesWithROI(*currBB, dataBuffer.element_indexed_from_last(1)->keypoints, 
                                              dataBuffer.element_indexed_from_last()->keypoints, 
-                                             dataBuffer.element_indexed_from_last()->kptMatches);                    
+                                             dataBuffer.element_indexed_from_last()->kptMatches);    
+                                    
                     computeTTCCamera(dataBuffer.element_indexed_from_last(1)->keypoints, 
                                      dataBuffer.element_indexed_from_last()->keypoints, 
                                      currBB->kptMatches, sensorFrameRate, ttcCamera);
+                    std::cout << "TTC Camera: " << ttcCamera << "\n";
                     //// EOF STUDENT ASSIGNMENT
 
                     bVis = true;
                     if (bVis)
                     {
-                        cv::Mat visImg = dataBuffer.element_indexed_from_last()->cameraImg.clone();
+                        cv::Mat visImg = img.clone();
                         showLidarImgOverlay(visImg, currBB->lidarPoints, P_rect_00, R_rect_00, RT, &visImg);
                         cv::rectangle(visImg, cv::Point(currBB->roi.x, currBB->roi.y), cv::Point(currBB->roi.x + currBB->roi.width, currBB->roi.y + currBB->roi.height), cv::Scalar(0, 255, 0), 2);
                         
                         char str[200];
                         sprintf(str, "TTC Lidar : %f s, TTC Camera : %f s", ttcLidar, ttcCamera);
                         putText(visImg, str, cv::Point2f(80, 50), cv::FONT_HERSHEY_PLAIN, 2, cv::Scalar(0,0,255));
-
+                        
+                        char type_str[200];
+                        sprintf(type_str, "Keypoint : %s, Descriptor : %s ", const_cast<char *>(detectorType.c_str()), const_cast<char *>(descriptorType.c_str()));
+                        putText(visImg, type_str, cv::Point2f(0, 340), cv::FONT_HERSHEY_PLAIN, 2, cv::Scalar(0, 0, 255));
+                        
                         string windowName = "Final Results : TTC";
                         cv::namedWindow(windowName, 4);
                         cv::imshow(windowName, visImg);
