@@ -86,7 +86,7 @@ void descKeypoints(vector<cv::KeyPoint> &keypoints, cv::Mat &img, cv::Mat &descr
         extractor = cv::BRISK::create(threshold, octaves, patternScale);
     }
     else if (descriptorType.compare("SIFT") == 0){
-        extractor = cv::SIFT::create();
+        extractor = cv::xfeatures2d::SIFT::create();
     }
     else if (descriptorType.compare("FREAK") == 0){
         extractor = cv::xfeatures2d::FREAK::create();
@@ -242,7 +242,7 @@ void detKeypointsModern(std::vector<cv::KeyPoint> &keypoints, cv::Mat &img, std:
     else if(detectorType.compare("SIFT") == 0){
         // Number of maximum keypoint to extract
         int minHessian = 3000;
-        cv::Ptr<cv::SIFT> siftDetector = cv::SIFT::create(minHessian);
+        cv::Ptr<cv::xfeatures2d::SIFT> siftDetector = cv::xfeatures2d::SIFT::create(minHessian);
         double t = (double)cv::getTickCount();
         siftDetector->detect( img, keypoints );
         t = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
