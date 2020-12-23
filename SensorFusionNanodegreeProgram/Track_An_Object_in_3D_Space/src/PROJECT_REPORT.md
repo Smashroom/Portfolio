@@ -211,7 +211,7 @@ $> ./3D_object_tracking
 
 ## BUILDING NOTE 
 
-If **opencv**>4.3.0 add change namespace for **SIFT** detector:
+- If **opencv**>4.3.0 add change namespace for **SIFT** detector:
 
 - **opencv** < 4.3.0
 ```cpp
@@ -221,4 +221,10 @@ cv::Ptr<cv::xfeatures2d::SIFT> siftDetector = cv::xfeatures2d::SIFT::create(minH
 - **opencv** >= 4.3.0
 ```cpp
 cv::Ptr<cv::SIFT> siftDetector = cv::SIFT::create(minHessian);
+```
+
+- Sometimes the large files are not pulled properly it could be due to dodgy hook file. Solution is to download the files manually
+```bash
+$> cd ../Track_An_Object_in_3D_Space/dat/yolo
+$> wget https://pjreddie.com/media/files/yolov3.weights  
 ```
