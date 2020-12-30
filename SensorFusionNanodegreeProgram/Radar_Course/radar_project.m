@@ -18,7 +18,7 @@ dres = 1;    % m
 % define the target's initial position and velocity. Note : Velocity
 % remains contant
 init_pos = 100; % m
-const_vel = 70; % m/s
+const_vel = 15; % m/s
 
 
 
@@ -64,14 +64,15 @@ td=zeros(1,length(t));
 % Running the radar scenario over the time. 
 r_t(1) = init_pos;
 Tx(1) = cos(2*pi*(fc*t(1)+slope*(t(1)^2)/2));
-delay = t(1) - 2*r_t(1)/c;
-tau = t(1) - delay;
+td(1) = t(1) - 2*r_t(1)/c;
+tau = t(1) - td(1);
 Rx(1) = cos(2*pi*(fc*tau+slope*(tau^2)/2));
 Mix(1) = Tx(1)*Rx(1);
 
 for i=2:length(t)         
     % *%TODO* :
     %For each time stamp update the Range of the Target for constant velocity. 
+
     r_t(i) = r_t(i-1) - const_vel*(t(i)-t(i-1)); 
     % *%TODO* :
     %For each time sample we need update the transmitted and
@@ -99,29 +100,34 @@ Mix = reshape(Mix,[Nr,Nd]);
  % *%TODO* :
 %run the FFT on the beat signal along the range bins dimension (Nr) and
 %normalize.
-sig_fft  = fft(Mix);
- % *%TODO* :
-% Take the absolute value of FFT output
-L = length(t);
-P2 = fftshift(sig_fft);
-RDM = abs(P2);
-RDM = 10*log10(RDM) ;
 
- % *%TODO* :
-% Output of FFT is double sided signal, but we are interested in only one side of the spectrum.
-% Hence we throw out half of the samples.
-Fs = 1/max(t);
-f = Fs*(0:(L/2))/L;
+% Create the frequency based on sampling frequency
+beat_fft_freq = Bsweep *(0:(Nr/2))/Nr;   
+% range
+R = (c*Tchirp*beat_fft_freq)/(2*Bsweep);
+L = Tchirp*Bsweep;
 
-%plotting the range
+freq_axis = 0:(Nr/2);
+target_pos = [];
+zero_shifted_signal = cell(1,Nd);
+for i = 1:Nd
+    sig_fft  = fft(Mix(:,i), Nr);
+    P2 = abs(sig_fft)./Nr;
+    P1 = P2(1:Nr/2+1);
+    
+    % Find current position of the target based on frequency indexing
+    curr_pos = freq_axis(find(max(P1) == P1));
+    
+    target_pos = [target_pos curr_pos];
+    zero_shifted_signal{i} = P1;
+end
+
+%plotting the range of single sample
 figure ('Name','Range from First FFT')
-subplot(2,1,1)
-plot(RDM);
- % *%TODO* :
- % plot FFT output 
+plot(freq_axis,zero_shifted_signal{1});
+grid on;
+title('FFT of first mixed signal sample')
 axis ([0 200 0 1]);
-
-
 
 %% RANGE DOPPLER RESPONSE
 % The 2D FFT implementation is already provided here. This will run a 2DFFT
@@ -157,18 +163,18 @@ figure,surf(doppler_axis,range_axis,RDM);
 
 % *%TODO* :
 %Select the number of Training Cells in both the dimensions.
-Tr = 2; 
-Tc = 2;
+Tr = 5; 
+Tc = 5;
 
 % *%TODO* :
 %Select the number of Guard Cells in both dimensions around the Cell under 
 %test (CUT) for accurate estimation
-Gr = 1;
-Gc = 1;
+Gr = 2;
+Gc = 2;
 
 % *%TODO* :
 % offset the threshold by SNR value in dB
-offset = 3; 
+offset = 10; 
 % *%TODO* :
 %Create a vector to store noise_level for each iteration on training cells
 noise_level = zeros(1,1);
@@ -191,22 +197,24 @@ noise_level = zeros(1,1);
 
 
    
-% xxxxxxx    
-% xxxxxxx  
-% xxoooxx
-% xxocoxx
-% xxoooxx
+% xxxxxxx       xxxxx
+% xxxxxxx       xooox
+% xxoooxx       xocox
+% xxocoxx       xooox
+% xxoooxx       xxxxx
 % xxxxxxx
 % xxxxxxx
 
-% xxxxx
-% xooox
-% xooox
-% xocox
-% xooox
-% xooox
-% xxxxx
+% *%TODO* :
+% The process above will generate a thresholded block, which is smaller 
+%than the Range Doppler Map as the CUT cannot be located at the edges of
+%matrix. Hence,few cells will not be thresholded. To keep the map size same
+% set those values to 0. 
+ 
 
+% The matrix has been initialised as zero vector to not deal with later
+% processing
+signal_cfar = zeros(Nr/2,Nd);
 for i = (Gr+Tr+1):(Nr/2-(Gr+Tr))
     for j = (Gc+Tc+1):(Nd-(Gc+Tc))
         % Currently cut cell index selected,
@@ -232,32 +240,22 @@ for i = (Gr+Tr+1):(Nr/2-(Gr+Tr))
         
         % Filter the signal above the threshold 
         if (noise_threshold  > signal)
-            signal = 0
+            signal = 0;
         end
+        
+        signal_cfar(i,j) = signal;
     end
 
 end
-
-
-% *%TODO* :
-% The process above will generate a thresholded block, which is smaller 
-%than the Range Doppler Map as the CUT cannot be located at the edges of
-%matrix. Hence,few cells will not be thresholded. To keep the map size same
-% set those values to 0. 
- 
-
-
-
-
-
 
 
 
 % *%TODO* :
 %display the CFAR output using the Surf function like we did for Range
 %Doppler Response output.
-figure,surf(doppler_axis,range_axis,'replace this with output');
+figure,surf(doppler_axis,range_axis,signal_cfar);
 colorbar;
+
 
 
  
