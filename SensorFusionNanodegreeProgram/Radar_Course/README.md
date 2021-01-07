@@ -23,8 +23,6 @@ In this section, EM signal has been simulated so that the radar sensor behaviour
 |:--:| 
 | **Figure 2**: Equations to simulate radar sensor behaviour to detect moving target |
 
-Add the slope information
-
 **Transceived Signal**
 
 | ![trans_image](images/transceived_signal.png) |
