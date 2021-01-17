@@ -12,8 +12,10 @@ int main() {
   /**
    * Programming assignment calls
    */
-  MatrixXd Xsig = MatrixXd(5, 11);
-  ukf.SigmaPointPrediction(&Xsig);
+  Eigen::VectorXd x_out = Eigen::VectorXd(5);
+  MatrixXd P_out = MatrixXd(5,5);
+  
+  ukf.UpdateState(&x_out, &P_out);
 
   // print result
   //std::cout << "Xsig = " << std::endl << Xsig << std::endl;
