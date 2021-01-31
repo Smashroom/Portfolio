@@ -20,13 +20,13 @@ public:
 	// Parameters 
 	// --------------------------------
 	// Set which cars to track with UKF
-	std::vector<bool> trackCars = {false,true,false};
+	std::vector<bool> trackCars = {true,false,false};
 	// Visualize sensor measurements
 	bool visualize_lidar = true;
 	bool visualize_radar = true;
 	bool visualize_pcd = false;
 	// Predict path in the future using UKF
-	double projectedTime = 0.66;
+	double projectedTime = 0.33;
 	int projectedSteps = 2;
 	// --------------------------------
 
@@ -191,6 +191,7 @@ public:
 		}
 		
 		// Populate the nis stats
+		std::cout << (traffic[0].ukf.nis_radar_[0]) << "\n";
 		nis_radar_stat_k = traffic[0].ukf.nis_radar_[0];
 		nis_lidar_stat_k = traffic[0].ukf.nis_lidar_[0];	
 	}
