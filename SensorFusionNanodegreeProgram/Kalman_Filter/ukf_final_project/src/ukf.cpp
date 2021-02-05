@@ -274,13 +274,6 @@ void UKF::Prediction(double delta_t)
 
 void UKF::UpdateLidar(MeasurementPackage meas_package)
 {
-  /**
-   * TODO: Complete this function! Use lidar data to update the belief 
-   * about the object's position. Modify the state vector, x_, and 
-   * covariance, P_.
-   * You can also calculate the lidar NIS, if desired.
-   */
-
   /* 
   * The measurement of the lidar does have the structure:
   *  z = [px py] which is first two elements of state space of CTRV
@@ -388,12 +381,16 @@ void UKF::UpdateLidar(MeasurementPackage meas_package)
 
 void UKF::UpdateRadar(MeasurementPackage meas_package)
 {
-  /**
-   * TODO: Complete this function! Use radar data to update the belief 
-   * about the object's position. Modify the state vector, x_, and 
-   * covariance, P_.
-   * You can also calculate the radar NIS, if desired.
-   */
+
+  /* 
+  * The measurement of the radar does have the structure:
+  *  z = [p yaw p_dot] which is different than state space of CTRV
+  * So that the calculated mean, covariance from transformed sigma 
+  * points has to be transformed first to radar space, updated and 
+  * transformed back to state space
+  */
+
+
   if(enable_debug_){
     std::cout << "radar update \n";
     std::cout << "State vector before radar correction \n"
@@ -401,9 +398,12 @@ void UKF::UpdateRadar(MeasurementPackage meas_package)
     std::cout << "State covariance before radar correction \n"
               << P_ << "\n";
   }
+
   // Predicted mean&covariance of generated sigma points in radar measurement space
   // Radar does measure three component
   // z = [ro phi phi_dot]
+
+  // ##### Initialise #####
   int n_z = 3;
 
   // Mean
@@ -417,9 +417,7 @@ void UKF::UpdateRadar(MeasurementPackage meas_package)
   if(enable_debug_)
     std::cout << "transform radar measurements in \n";
   
-  // TransformToRadarMeasurement(&z_pred, &S, &Zsig);
-  
-  //************************
+
   Eigen::MatrixXd R = Eigen::MatrixXd(n_z, n_z);
   R << std_radr_*std_radr_, 0, 0,
       0, std_radphi_*std_radphi_, 0,
@@ -433,7 +431,9 @@ void UKF::UpdateRadar(MeasurementPackage meas_package)
   Zsig.fill(0.0);
 
   double px, py, v, yaw, yaw_rate, px2, py2, yaw_estimate, theta;
-  
+
+  // ##### Transform to radar space #####
+
   // transform sigma points into measurement space
   for (int i = 0; i < Xsig_pred_.cols(); i++)
   {
@@ -537,6 +537,8 @@ void UKF::UpdateRadar(MeasurementPackage meas_package)
 
   K = Tc * S.inverse();
 
+  // ##### Update&Transform back to state space #####
+
   // update state mean and covariance matrix
   x_ += K * (z_diff);
   // angle normalization
@@ -560,63 +562,6 @@ void UKF::UpdateRadar(MeasurementPackage meas_package)
   }
 }
 
-void UKF::TransformToRadarMeasurement(Eigen::VectorXd *z_pred, Eigen::MatrixXd *S, Eigen::MatrixXd *Zsig)
-{
-  Eigen::MatrixXd R = Eigen::MatrixXd(z_pred->rows(), z_pred->rows());
-  R << pow(std_radr_, 2), 0, 0,
-      0, pow(std_radphi_, 2), 0,
-      0, 0, pow(std_radrd_, 2);
-
-  // Reset z_pred and S
-  z_pred->fill(0.0);
-
-  // Reset the sigma points in radar space matrix
-  Zsig->fill(0.0);
-
-  double px, py, v, yaw, yaw_rate, px2, py2;
-  // transform sigma points into measurement space
-  for (int i = 0; i < Xsig_pred_.cols(); i++)
-  {
-    px = Xsig_pred_(0, i);
-    py = Xsig_pred_(1, i);
-    v = Xsig_pred_(2, i);
-    yaw = Xsig_pred_(3, i);
-    yaw_rate = Xsig_pred_(4, i);
-
-    px2 = pow(px, 2);
-    py2 = pow(py, 2);
-
-    Zsig->col(i) << sqrt(px2 + py2),
-        atan2(py, px),
-        v * (px * cos(yaw) + py * sin(yaw)) / float(sqrt(px2 + py2));
-  }
-
-  // calculate mean predicted measurement
-  for (int i = 0; i < Zsig->cols(); i++)
-  {
-    // predict state mean
-    (*z_pred) += weights_(i) * Zsig->col(i);
-  }
-  std::cout << "radar_sig pred : \n"
-            << (*z_pred) << "\n";
-
-  // calculate innovation covariance matrix S
-  Eigen::VectorXd z_diff; /* To check angle normalisation*/
-  // predict state covariance matrix
-  for (int i = 0; i < Zsig->cols(); i++)
-  {
-    z_diff = Zsig->col(i) - (*z_pred);
-
-    // angle normalization
-    while (z_diff(1) > M_PI)
-      z_diff(1) -= 2. * M_PI;
-    while (z_diff(1) < -M_PI)
-      z_diff(1) += 2. * M_PI;
-
-    (*S) = (*S) + weights_(i) * (z_diff) * (z_diff.transpose());
-  }
-  (*S) = (*S) + R;
-}
 void UKF::GenerateSigmaPoints(Eigen::MatrixXd *Xsig)
 {
   // Square root of P

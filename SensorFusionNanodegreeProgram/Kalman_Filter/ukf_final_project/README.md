@@ -1,76 +1,62 @@
-# SFND_Unscented_Kalman_Filter
-Sensor Fusion UKF Highway Project Starter Code
+# SFND Final Project (Unscented Kalman Filter)
+
+The final project of Sensor Fusion Nanodegree Program. It implements different bit and pieces of Unscented Kalman Filter to track states of multiple cars on a  highway. Some fairy dust has been added to the measurements to face with real world challenges. The foundation of the code is coming from [sfnd-ukf](https://github.com/udacity/SFND_Unscented_Kalman_Filter).  
 
 <img src="media/ukf_highway_tracked.gif" width="700" height="400" />
 
-In this project you will implement an Unscented Kalman Filter to estimate the state of multiple cars on a highway using noisy lidar and radar measurements. Passing the project requires obtaining RMSE values that are lower that the tolerance outlined in the project rubric. 
+# Build instructions
 
-The main program can be built and ran by doing the following from the project top directory.
+```bash
+mkdir build
+cd build
+cmake ..
+make
+./ukf_highway
+```
 
-1. mkdir build
-2. cd build
-3. cmake ..
-4. make
-5. ./ukf_highway
+# Aim
 
-Note that the programs that need to be written to accomplish the project are src/ukf.cpp, and src/ukf.h
-
-The program main.cpp has already been filled out, but feel free to modify it.
+The project uses Unscented Kalman Filter with environment created by PCL render functions. UKF is implemented as a part of project, and PCL has been used by Udacity to handle rendering of environment, replaying recorded laser and radar data and calculate how accurate the tracking is. 
 
 <img src="media/ukf_highway.png" width="700" height="400" />
 
-`main.cpp` is using `highway.h` to create a straight 3 lane highway environment with 3 traffic cars and the main ego car at the center. 
-The viewer scene is centered around the ego car and the coordinate system is relative to the ego car as well. The ego car is green while the 
-other traffic cars are blue. The traffic cars will be accelerating and altering their steering to change lanes. Each of the traffic car's has
-it's own UKF object generated for it, and will update each indidual one during every time step. 
+# Workflow 
 
-The red spheres above cars represent the (x,y) lidar detection and the purple lines show the radar measurements with the velocity magnitude along the detected angle. The Z axis is not taken into account for tracking, so you are only tracking along the X/Y axis.
+<img src="media/ukf_flow.png" width="700" height="700" />
 
----
+- Simulation: The component that implemented by Udacity and it updates position of the tracked vehicle based on the recorded data.
+- Prediction: This component implemented as a part of the project by following the course notes provided by Udacity. It is responsible of getting the prior state of the tracked vejoc;e and apply unscented transformation to the state so that motion model of tracked vehicle will be considered. 
+- UpdateLaser: This component implemented as a part of the project and basically, it gets the laser measurement and updates the prediction based on the real measurement.
+- UpdateRadar: This component implemented as a part of the project and is similar to the UpdateLaser component apart from the transformation step. It requires to transform state to a polar coordinate to do the update. Fortunately, nothing is changing from unscented transformation side. 
 
-## Other Important Dependencies
-* cmake >= 3.5
-  * All OSes: [click here for installation instructions](https://cmake.org/install/)
-* make >= 4.1 (Linux, Mac), 3.81 (Windows)
-  * Linux: make is installed by default on most Linux distros
-  * Mac: [install Xcode command line tools to get make](https://developer.apple.com/xcode/features/)
-  * Windows: [Click here for installation instructions](http://gnuwin32.sourceforge.net/packages/make.htm)
-* gcc/g++ >= 5.4
-  * Linux: gcc / g++ is installed by default on most Linux distros
-  * Mac: same deal as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
-  * Windows: recommend using [MinGW](http://www.mingw.org/)
- * PCL 1.2
+# Performance Metrics
 
-## Basic Build Instructions
+There are several parameters has been used as performance metrics. First one is the **Root Mean Square Error(RMSE)** of the tracking, in other words difference between actual vehicle position and predicted position. It is quite useful, but not enough to understand the accuracy of each components described in above section. Second metric has been introduced to measure accuracy of UpdateLaser and UpdateRadar component and the name of this metric is **Normalised Innovation Squared (NIS)**. Basically, it compares the predicted state with actual measurement to validate how good correction steps it is working.
 
-1. Clone this repo.
-2. Make a build directory: `mkdir build && cd build`
-3. Compile: `cmake .. && make`
-4. Run it: `./ukf_highway`
+ NIS follows distribution that is called **chi-square**, so that it has been calculated for each step and at the end of the run, each NIS value have been compared to a threshold. The threshold picked up from Chi-square distribution table and it corresponds to the value that it is above 95% of the NIS distribution. The threshold depends on dimension of measurement space, for this reason it is different for laser and radar. (*laser:* 5.991, *radar:*7.815)
 
-## Editor Settings
+# Different Use Case
 
-We've purposefully kept editor configuration files out of this repo in order to
-keep it as simple and environment agnostic as possible. However, we recommend
-using the following settings:
+- Only Radar
+    - RMSE: X=1.06, Vx=0.95, Vy=0.59 (After running the simulation for 30sec and all vehicles are tracked)
+    - Number of NIS value above the threshold: 
+        - Laser: 0/300 (That means the process noise, cause the measurement to overfit)
+        - Radar: 0/300 (That means the process noise, cause the measurement to overfit) 
 
-* indent using spaces
-* set tab width to 2 spaces (keeps the matrices in source code aligned)
+- Only Laser
+    - RMSE: Vx=1.20, Vy=0.70 (After running the simulation for 30sec and all vehicles are tracked)
+    - Number of NIS value above the threshold: 
+        - Laser: 113/300 (That means the process noise, cause the measurement to underfitted)
+        - Radar: 82/300 (That means the process noise, cause the measurement to underfitted) 
 
-## Code Style
 
-Please stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html) as much as possible.
+- Laser & Radar
+   - RMSE: Y=0.35 (After running the simulation for 30sec and all vehicles are tracked)
+    - Number of NIS value above the threshold: 
+        - Laser: 39/300 (That means the process noise, cause the measurement to underfitted)
+        - Radar: 19/300 (That means the process noise, cause the measurement to underfitted) 
 
-## Generating Additional Data
+As one can see, radar is worse with estimating position of the vehicle, on the other hand laser struggles with estimating velocity. However, when both is combined and fused the overall performance of the UKF improves significantly and it satisfies one of the Project goals which is keeping the RMSE below the given threshold.
 
-This is optional!
 
-If you'd like to generate your own radar and lidar modify the code in `highway.h` to alter the cars. Also check out `tools.cpp` to
-change how measurements are taken, for instance lidar markers could be the (x,y) center of bounding boxes by scanning the PCD environment
-and performing clustering. This is similar to what was done in Sensor Fusion Lidar Obstacle Detection.
 
-## Project Instructions and Rubric
-
-This information is only accessible by people who are already enrolled in Sensor Fusion. 
-If you are enrolled, see the project page in the classroom
-for instructions and the project rubric.

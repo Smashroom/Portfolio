@@ -67,15 +67,6 @@ class UKF {
    */
   void PredictMeanAndCovariance();
   
-  /**
-   * Applies unscented transform to predicted covariance&mean of sigma points
-   * to radar measurement space to be able to do update with the sensor
-   * @param radar_sig_pred mean of sigma points in radar measurement space 
-   * @param S covariance of sigma points in radar measurement space
-   * @param Zsig sigma points in radar measurement space
-   */
-  void TransformToRadarMeasurement(Eigen::VectorXd *radar_sig_pred, Eigen::MatrixXd *S, Eigen::MatrixXd *Zsig);
-  
   // initially set to false, set to true in first call of ProcessMeasurement
   bool is_initialized_;
 
