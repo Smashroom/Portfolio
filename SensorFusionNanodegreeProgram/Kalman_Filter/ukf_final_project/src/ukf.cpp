@@ -45,10 +45,10 @@ UKF::UKF()
   Xsig_pred_.fill(0.0);
   
   // Process noise standard deviation longitudinal acceleration in m/s^2
-  std_a_ = 0.8;
+  std_a_ = 2.0;
 
   // Process noise standard deviation yaw acceleration in rad/s^2
-  std_yawdd_ = 0.5;
+  std_yawdd_ = 0.7;
 
   /**
    * DO NOT MODIFY measurement noise values below.
@@ -130,14 +130,9 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package)
       x_ << meas_package.raw_measurements_[0],
           meas_package.raw_measurements_[1],
           4,
-          0.5, //atan2(meas_package.raw_measurements_[1],meas_package.raw_measurements_[0]),
+          0.2, //atan2(meas_package.raw_measurements_[1],meas_package.raw_measurements_[0]),
           0;
       
-      P_ << std_laspx_*std_laspx_, 0, 0, 0, 0,
-            0, std_laspy_*std_laspy_, 0, 0, 0,
-            0, 0, 1, 0, 0,
-            0, 0, 0, 1, 0,
-            0, 0, 0, 0, 1;
       if(enable_debug_){
         std::cout << "State vector is \n"
                 << x_ << "\n";
@@ -157,7 +152,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package)
         std::cout << "meas_package: " << meas_package.raw_measurements_ << "\n";
       double vx = meas_package.raw_measurements_[2] * cos(meas_package.raw_measurements_[1]);
       double vy = meas_package.raw_measurements_[2] * sin(meas_package.raw_measurements_[1]);
-      double v = 4;
+      double v = 2.5;
       double x = meas_package.raw_measurements_[0] * cos(meas_package.raw_measurements_[1]);
       double y = meas_package.raw_measurements_[0] * sin(meas_package.raw_measurements_[1]);
 

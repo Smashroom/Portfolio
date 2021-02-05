@@ -10,7 +10,7 @@ The final project of Sensor Fusion Nanodegree Program. It implements different b
 mkdir build
 cd build
 cmake ..
-make
+make -j8
 ./ukf_highway
 ```
 
