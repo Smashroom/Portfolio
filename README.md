@@ -104,7 +104,7 @@ In this project my advisor was Prof. Kemal Leblecioglu and this project was our 
 In this project my advisor was Prof. Klauss Werner Schmidt and this project was our course related homework. Our purpose was to develop a feedback linearization based planar helicopter controller. 
 
 
-Sensor Fusion Nanodegree Program (30 November 2020)
+# Sensor Fusion Nanodegree Program (30 November 2020 - 15 Januray 2021)
 -----------------
 
 **Lidar Obstacle Detection(04 December 2020)**
@@ -116,7 +116,7 @@ As part of the Sensor Fusion Nanodegree program, I implemented a lidar obstacle 
 - Render them 
 
 **Camera Based 2D Feature Tracking(08 December 2020)**
-As part of the Sensor Fusion Nanodegree program, I implemented a camera based 2d feature tracking app with the guidelines from the program. Opencv library has been used to discover different keypoint/descriptor detectors for given use case which is 2d collision avoidance system. 
+As part of the Sensor Fusion Nanodegree program, I implemented a camera based 2d feature tracking app with the guidelines from the program. Opencv library has been used to discover functionalities of different keypoint/descriptor detectors for given use case which is 2d collision avoidance system. 
 
 Briefly the app consists of:
 - Generate keypoints with different detectors such as HARRIS, FAST, BRISK, ORB, AKAZE, SIFT, SHI-TOMASI
@@ -125,6 +125,16 @@ Briefly the app consists of:
 - Extend matching algorithm with KNN (K nearest neighbor) matching and add descriptor distance ratio test proposed by [1]
 - Compare different modalities and chose top 3 detector pairs for given use case
 
+**Track an Object in 3D Space**
+
+**Radar Course**
+
+**Unscented Kalman Filter for multi-vehicle tracking**
+
+# Deep Learning Nanodegree Program (10 January 2021 - 22 April 2021)
+-----------------
+
+**Bike Sharing Project** 
 
 
 **References**
