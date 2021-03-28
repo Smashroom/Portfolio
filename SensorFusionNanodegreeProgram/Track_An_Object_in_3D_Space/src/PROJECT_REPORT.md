@@ -5,7 +5,6 @@ In this project the purpose is:
 - Calculate **Time-to-Collision** based on only lidar measurements/observations and do required filtering for the lidar observations to disregard outliers due to false measurements (FP.2)
 - Associate keypoint correspondes to the bounding boxes (FP.3)
 - Calculate **Time-to-Collision**  based on only keypoint correspondences from the matched bounding boxes (FP.4)
-- 
 
 
 # FP.1 Match 3D Objects

@@ -22,7 +22,7 @@ The project uses Unscented Kalman Filter with environment created by PCL render 
 
 # Workflow 
 
-<img src="media/ukf_flow.png" width="700" height="700" />
+<img src="media/ukf_flow.png" width="700" height="700" rotate="180"/>
 
 - Simulation: The component that implemented by Udacity and it updates position of the tracked vehicle based on the recorded data.
 - Prediction: This component implemented as a part of the project by following the course notes provided by Udacity. It is responsible of getting the prior state of the tracked vejoc;e and apply unscented transformation to the state so that motion model of tracked vehicle will be considered. 
