@@ -13171,7 +13171,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
@@ -13198,7 +13198,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">view_line_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
@@ -13225,6 +13225,39 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dataset Stats
+Roughly the number of unique words: 46367
+Number of lines: 109233
+Average number of words in each line: 5.544240293684143
+
+The lines 0 to 10:
+jerry: do you know what this is all about? do you know, why were here? to be out, this is out...and out is one of the single most enjoyable experiences of life. people...did you ever hear people talking about we should go out? this is what theyre talking about...this whole thing, were all out now, no one is home. not one person here is home, were all out! there are people trying to find us, they dont know where we are. (on an imaginary phone) did you ring?, i cant find him. where did he go? he didnt tell me where he was going. he must have gone out. you wanna go out you get ready, you pick out the clothes, right? you take the shower, you get all ready, get the cash, get your friends, the car, the spot, the reservation...then youre standing around, what do you do? you go we gotta be getting back. once youre out, you wanna get back! you wanna go to sleep, you wanna get up, you wanna go out again tomorrow, right? where ever you are in life, its my feeling, youve gotta go. 
+
+jerry: (pointing at georges shirt) see, to me, that button is in the worst possible spot. the second button literally makes or breaks the shirt, look at it. its too high! its in no-mans-land. you look like you live with your mother. 
+
+george: are you through? 
+
+jerry: you do of course try on, when you buy? 
+
+george: yes, it was purple, i liked it, i dont actually recall considering the buttons. 
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13247,7 +13280,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">problem_unittests</span> <span class="k">as</span> <span class="nn">tests</span>
@@ -13278,38 +13311,21 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Tests Passed
+</pre>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">problem_unittests</span> <span class="k">as</span> <span class="nn">tests</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">Counter</span>
+</div>
 
-<span class="k">def</span> <span class="nf">create_lookup_tables</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Create lookup tables for vocabulary</span>
-<span class="sd">    :param text: The text of tv scripts split into words</span>
-<span class="sd">    :return: A tuple of dicts (vocab_to_int, int_to_vocab)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># TODO: Implement Function</span>
-    
-    <span class="n">vocab</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
-    <span class="n">int_to_vocab</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">vocab</span><span class="p">))</span>
-    <span class="n">vocab_to_int</span> <span class="o">=</span> <span class="p">{</span><span class="n">ch</span><span class="p">:</span> <span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">int_to_vocab</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-    
-    <span class="c1"># return tuple</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">vocab_to_int</span><span class="p">,</span> <span class="n">int_to_vocab</span><span class="p">)</span>
-
-
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">tests</span><span class="o">.</span><span class="n">test_create_lookup_tables</span><span class="p">(</span><span class="n">create_lookup_tables</span><span class="p">)</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
@@ -13338,44 +13354,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">token_lookup</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate a dict to turn punctuation into a token.</span>
-<span class="sd">    :return: Tokenized dictionary where the key is the punctuation and the value is the token</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># TODO: Implement Function</span>
-    
-    <span class="n">tokens_dict</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;.&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;PERIOD&gt;&#39;</span><span class="p">,</span>
-                       <span class="s1">&#39;,&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;COMMA&gt;&#39;</span><span class="p">,</span>
-                       <span class="s1">&#39;&quot;&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;QUOTATION_MARK&gt;&#39;</span><span class="p">,</span>
-                       <span class="s1">&#39;;&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;SEMICOLON&gt;&#39;</span><span class="p">,</span>
-                       <span class="s1">&#39;!&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;EXCLAMATION_MARK&gt;&#39;</span><span class="p">,</span>
-                       <span class="s1">&#39;?&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;QUESTION_MARK&gt;&#39;</span><span class="p">,</span>
-                       <span class="s1">&#39;(&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;LEFT_PAREN&gt;&#39;</span><span class="p">,</span>
-                       <span class="s1">&#39;)&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;RIGHT_PAREN&gt;&#39;</span><span class="p">,</span>
-                       <span class="s1">&#39;-&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;DASH&gt;&#39;</span><span class="p">,</span>
-                       <span class="s1">&#39;?&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;QUESTION_MARK&gt;&#39;</span><span class="p">,</span>
-                       <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;NEW_LINE&gt;&#39;</span><span class="p">}</span>
-    <span class="k">return</span> <span class="n">tokens_dict</span>
-
-
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">DON&#39;T MODIFY ANYTHING IN THIS CELL THAT IS BELOW THIS LINE</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">tests</span><span class="o">.</span><span class="n">test_tokenize</span><span class="p">(</span><span class="n">token_lookup</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">token_lookup</span><span class="p">():</span>
@@ -13406,6 +13385,24 @@ div#notebook {
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Tests Passed
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13417,7 +13414,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
