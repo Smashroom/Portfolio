@@ -23,13 +23,13 @@ $ jupyter-lab
 
 In our experiment we have a differential wheeled robot that equipped with lidar, imu, a wall and another static sensor bot that equipped with lidar to measure the stopping distance of the target_bot. 
 
-<img src="pics/gazebo_setup.png" width="400" height="400">
+<img align="center" src="pics/gazebo_setup.png" width="400" height="400">
 
 ### Layout of the experiment!
 
 As one can see from the above Figure, there is a wheeled robot facing a wall and another sensor bot which has the wall and the wheeled robot in its FoV. 
 
-<img src="pics/gazebo_setup_pcl.png" width="400" height="400">
+<img align="center" src="pics/gazebo_setup_pcl.png" width="400" height="400">
 
 the wheeled robot will be tasked via **MockMission** to follow a straight path toward the wall. In the meantime the robot will be listening any **EmergencyStop** requests. 
 
@@ -37,11 +37,11 @@ Unless any **EmergencyStop** requests have been made or **MockMission** has been
 
 The general system architecture can be found below, 
 
-<img src="pics/system_architecture.png" width="400" height="400">
+<img align="center" src="pics/system_architecture.png" width="400" height="400">
 
 The simplest model of **MockMission**
 
-<img src="pics/mock_mission_architecture.png" width="200" height="200">
+<img align="center" src="pics/mock_mission_architecture.png" width="200" height="200">
 
 ## To export as html with embedded images
 
