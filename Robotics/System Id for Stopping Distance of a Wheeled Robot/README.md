@@ -25,7 +25,7 @@ In our experiment we have a differential wheeled robot that equipped with lidar,
 
 <img src="pics/gazebo_setup.png" width="400" height="400">
 
-# Layout of the experiment!
+### Layout of the experiment!
 
 As one can see from the above Figure, there is a wheeled robot facing a wall and another sensor bot which has the wall and the wheeled robot in its FoV. 
 
