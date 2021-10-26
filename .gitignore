@@ -51,10 +51,11 @@ Temporary Items
 *build/
 build/
 
+*devel/
+devel/
+
 .DS_Store
 Thumbs.db
 .idea
-*/project_root/build
-*/project_root/devel
 .catkin_workspace
 CMakeLists.txt
