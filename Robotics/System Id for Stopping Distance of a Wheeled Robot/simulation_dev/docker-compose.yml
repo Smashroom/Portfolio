@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  simulation_dev:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    hostname: simulation_dev
+    domainname: simulation_dev.local
+    volumes:
+      - ./project_root:/home/ubuntu/catkin_ws
+    ports:
+      - "5900:5900"
+      - "2222:22"
+    environment:
+      VNC_PASSWORD: ubuntu
+      PASSWORD: ubuntu
+      RESOLUTION: 1920x1080
