@@ -17,6 +17,11 @@ $ pip install bokeh bagpy pandas jupyterlab
 * rosbags from the experiments [one-example](https://we.tl/t-4W2gL6WWej)
 
 
+* Enter to the analysis realms
+```bash
+$ cd ~/path_to_repo/Portfolio/Robotics/System_Id_for_Stopping_Distance_of_a_Wheeled_Robot/analysis$
+```
+
 * Copy the rosbags and try to remember the fullpath(/home/...) of data folder and data name you want to investigate (Unfortunately, multi-data analysis still on the way...)
 
 * The command given below will kick-off the jupyter notebook  and open an html for further code visualisation.
