@@ -27,8 +27,6 @@ $ jupyter-lab
 
 * And time to enjoyyyy! 
 
-I quite enjoyed the project, but it is such a vaguely defined definition of done which makes it really difficult to stop thinking about it. My approach is always, first infrastracture than boom boom!
-
 ## To export as html with embedded images
 
 To be able to download a html with embedded images Nbextensions can be quite handy. The following commands do install the package and configure jupyter to enable it.
