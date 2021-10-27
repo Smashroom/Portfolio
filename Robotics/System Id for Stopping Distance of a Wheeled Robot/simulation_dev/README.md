@@ -8,7 +8,7 @@ To be able to have reproducible results and easy deployment, I looked for the op
 
 ## Requirements
 
-* Docker
+* Docker with nvidia support
 * Bash
 * docker-compose
 * Remmina Remote Desktop Client 
@@ -21,6 +21,7 @@ To be able to have reproducible results and easy deployment, I looked for the op
 * Open a browser to [http://localhost:6080](http://localhost:6080)
 * login as `ubuntu:ununtu` in the http vnc client(Remmina `localhost:5900`)
 * or ssh to the container on port 222 with `ssh -v -p 2222 ubuntu@localhost`
+* 
 
 ### Credentials
 
@@ -63,6 +64,46 @@ The simplest model of **MockMission**
 
 ## Howto run Experiments
 
+* Open up a terminal *menu/System Tools/LXTermal*
+* Kick-off the simulator (when you open a terminal, it should already source the development setup flags) 
+```bash
+$ roslaunch mybot_gazebo mybot_world.launch
+``` 
+* user_comment=Open Another Terminal or ssh in up to you (I fancy a lot Visual Studio Code Remote Window option)
+
+* Kick-off **MockEmergencyStop** task (When you want to exit just enter )
+```bash
+$ rosrun mybot_motion_plan mock_emergency_stop.py
+```
+
+### Attention
+Whenever you want to send a **EmergencyStop** request, type *y* and hit "Enter". That is the only interaction point we have with the robot. The app won't crash if you don't type anything and if you want **quit** just type *q* and hit "Enter".
+
+* echo $user_comment (:P)
+
+* (To record) Kick-off rosbag recorder ...
+```bash
+$ rosbag record -a
+``` 
+
+* echo $user_comment
+
+* (To have fun) Kick-off **MockMission** task that will task the robot to traverse to a destination point. 
+```bash
+$ rosrun mybot_motion_plan mock_mission.py
+```
+
+* For data analysis please go to analysis folder, and don't forget to pick your rosbags from the container
+```bash
+scp -r ubuntu@ip_of_the_unit:~/path_where_you_ran_rosbag/*.bag ~/path_to_put_bags/
+```
+
+* If you wish close the container, up to you! 
+
+```
+DISCLAIMER
+(!The robot is using just basic diff drive robot model and values has been set just to be able to get the robot going! The control and simulated_hardware should be improved significantly to replicate a robot living in the real world(StochasticityLandd))
+```
 
 # Funny and Remarkable last notes by the Author
 
