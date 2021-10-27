@@ -2,7 +2,7 @@ FROM misterkoz/ros-melodic-with-vnc-and-gazebo
 ARG USERNAME=ubuntu
 ARG WORKSPACE=/home/ubuntu/catkin_ws
 
-COPY wheeled_robot_sim ${WORKSPACE}
+COPY project_root ${WORKSPACE}
 RUN chown -R ${USERNAME}:${USERNAME} ${WORKSPACE}
 
 RUN rosdep init
