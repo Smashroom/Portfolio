@@ -1,12 +1,12 @@
 version: '3'
 
 services:
-  simulation_dev:
+  one-in-all1:
     build:
       context: ./
       dockerfile: Dockerfile
-    hostname: simulation_dev
-    domainname: simulation_dev.local
+    hostname: one-in-all1
+    domainname: one-in-all1.local
     volumes:
       - ./project_root:/home/ubuntu/catkin_ws
     ports:
