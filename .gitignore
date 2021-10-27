@@ -50,3 +50,12 @@ Temporary Items
 # Build directories
 *build/
 build/
+
+*devel/
+devel/
+
+.DS_Store
+Thumbs.db
+.idea
+.catkin_workspace
+CMakeLists.txt

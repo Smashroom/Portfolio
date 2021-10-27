@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  one-in-all1:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    hostname: one-in-all1
+    domainname: one-in-all1.local
+    volumes:
+      - ./project_root:/home/ubuntu/catkin_ws
+    ports:
+      - "5900:5900"
+      - "2222:22"
+    environment:
+      VNC_PASSWORD: ubuntu
+      PASSWORD: ubuntu
+      RESOLUTION: 1920x1080
